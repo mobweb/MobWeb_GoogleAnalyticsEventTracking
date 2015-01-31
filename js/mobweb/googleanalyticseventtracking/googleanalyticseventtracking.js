@@ -3,7 +3,7 @@ if (typeof jQuery != 'undefined') {
     jQuery(document).ready(function($) {
         var filetypes = /\.(zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i;
         var baseHref = '';
-        if (jQuery('base').attr('href') != undefined) baseHref = jQuery('base').attr('href');
+        if (jQuery('base').attr('href') !== undefined) baseHref = jQuery('base').attr('href');
 
         jQuery('a').on('click', function(event) {
             var el = jQuery(this);
@@ -12,7 +12,8 @@ if (typeof jQuery != 'undefined') {
             var isThisDomain = href.match(document.domain.split('.').reverse()[1] + '.' + document.domain.split('.').reverse()[0]);
             if (!href.match(/^javascript:/i)) {
                 var elEv = [];
-                elEv.value = 0, elEv.non_i = false;
+                elEv.value = 0;
+                elEv.non_i = false;
                 if (href.match(/^mailto\:/i)) {
                     elEv.category = "email";
                     elEv.action = "click";
@@ -47,9 +48,17 @@ if (typeof jQuery != 'undefined') {
                         'eventValue': elEv.value
                     };
 
-                    ga('send', eventData);
+                    // Check which version of Google Analytics to use
+                    if(typeof ga != 'undefined') {
+                        ga('send', eventData);
+                    } else if(typeof _gaq != 'undefined') {
+                        _gaq.push(['_trackEvent', eventData.eventCategory, eventData.eventAction, eventData.eventLabel, eventData.eventValue, elEv.non_i]);
+                    } else {
+                        console.error('MobWeb_GoogleAnalyticsEventTracking: Google Analytics object is not available, unable to submit event tracking data');
+                    }
 
-                    if (el.attr('target') == undefined || el.attr('target').toLowerCase() != '_blank') {
+
+                    if (el.attr('target') === undefined || el.attr('target').toLowerCase() != '_blank') {
                         setTimeout(function() {
                             location.href = elEv.loc;
                         }, 400);
@@ -59,4 +68,6 @@ if (typeof jQuery != 'undefined') {
             }
         });
     });
+} else {
+    console.error('MobWeb_GoogleAnalyticsEventTracking: jQuery object is not available, unable to submit event tracking data');
 }
