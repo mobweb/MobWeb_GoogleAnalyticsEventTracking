@@ -1,0 +1,10 @@
+app/code/community/MobWeb/GoogleAnalyticsEventTracking app/code/community/MobWeb/GoogleAnalyticsEventTracking/
+
+app/design/frontend/base/default/layout/mobweb/googleanalyticseventtracking.xml app/design/frontend/base/default/layout/mobweb/googleanalyticseventtracking.xml
+
+js/mobweb/googleanalyticseventtracking/googleanalyticseventtracking.js js/mobweb/googleanalyticseventtracking/googleanalyticseventtracking.js
+
+app/etc/modules/MobWeb_GoogleAnalyticsEventTracking.xml app/etc/modules/MobWeb_GoogleAnalyticsEventTracking.xml
+
+# Clear the cache
+@shell   rm -rf $PROJECT/var/cache/* && echo "Magento Cache cleared"

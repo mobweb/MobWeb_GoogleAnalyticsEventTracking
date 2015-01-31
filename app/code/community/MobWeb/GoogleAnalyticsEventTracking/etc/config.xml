@@ -1,0 +1,16 @@
+<config>
+    <modules>
+        <MobWeb_GoogleAnalyticsEventTracking>
+            <version>0.1.0</version>
+        </MobWeb_GoogleAnalyticsEventTracking>
+    </modules>
+    <frontend>
+         <layout>
+             <updates>
+                 <googleanalyticseventtracking>
+                     <file>mobweb/googleanalyticseventtracking.xml</file>
+                 </googleanalyticseventtracking>
+             </updates>
+         </layout>
+     </frontend>
+</config>
